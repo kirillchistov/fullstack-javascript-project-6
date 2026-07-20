@@ -16,7 +16,7 @@ import Pug from 'pug';
 import i18next from 'i18next';
 
 import fastifyMethodOverride from './lib/methodOverride.js';
-import rollbarFactory from './lib/rollbar.js';
+import rollbarFactory, { getRollbarAccessToken } from './lib/rollbar.js';
 
 import ru from './locales/ru.js';
 import en from './locales/en.js';
@@ -32,11 +32,6 @@ dotenv.config();
 const __dirname = fileURLToPath(path.dirname(import.meta.url));
 
 const mode = process.env.NODE_ENV || 'development';
-
-const rollbar = rollbarFactory({
-  accessToken: process.env.VITE_ROLLBAR_ACCESS_TOKEN,
-  environment: mode,
-});
 
 const setUpViews = async (app) => {
   const helpers = getHelpers(app);
@@ -87,8 +82,18 @@ const addHooks = (app) => {
 };
 
 const setUpErrorHandling = (app) => {
+  const rollbar = rollbarFactory({
+    accessToken: getRollbarAccessToken(),
+    environment: mode,
+    log: app.log,
+  });
+
   app.setErrorHandler((error, request, reply) => {
-    rollbar.error(error, request.raw);
+    rollbar.error(error, request.raw, (rollbarErr) => {
+      if (rollbarErr) {
+        request.log.error({ err: rollbarErr }, 'Rollbar reporting failed');
+      }
+    });
     reply.send(error);
   });
 };
