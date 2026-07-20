@@ -7,6 +7,9 @@
   "engines": {
     "node": ">=20.0.0"
   },
+  "installConfig": {
+    "legacyPeerDeps": true
+  },
   "scripts": {
     "prebuild": "rm -rf dist",
     "test": "NODE_OPTIONS=--experimental-vm-modules jest --verbose --runInBand",
@@ -56,11 +59,12 @@
     "pug": "^3.0.3",
     "qs": "^6.15.0",
     "rollbar": "^3.1.0",
+    "sqlite3": "^6.0.1",
     "webpack": "^5.105.4",
     "@vscode/sqlite3": "^5.1.2"
   },
   "overrides": {
-    "better-sqlite3": "^12.11.1"
+    "better-sqlite3": "12.11.1"
   },
   "devDependencies": {
     "@faker-js/faker": "^9.9.0",
@@ -74,7 +78,6 @@
     "eslint-plugin-jest": "^29.15.0",
     "jest": "^30.3.0",
     "jest-cli": "^30.3.0",
-    "sqlite3": "^6.0.1",
     "style-loader": "^4.0.0",
     "webpack-cli": "^6.0.1"
   }
