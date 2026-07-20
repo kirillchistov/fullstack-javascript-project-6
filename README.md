@@ -11,7 +11,7 @@
 ## Демо
 
 - [Пример проекта Hexlet](https://js-task-manager-ru.hexlet.app/)
-- [Задеплоенное приложение](https://my-todo-app.onrender.com) — здесь добавлю ссылку после деплоя на Render
+- [Задеплоенное приложение](https://hexlet-task-manager-n821.onrender.com) — здесь добавлю ссылку после деплоя на Render
 
 ## Установка
 
@@ -50,17 +50,17 @@ make test
 
 ## Деплой на Render
 
-1. Зарегистрируйтесь на [render.com](https://render.com).
+1. Зарегистрироваться на [render.com](https://render.com).
 2. Подключите GitHub-репозиторий проекта.
-3. Создайте **Blueprint** из файла `render.yaml` в корне репозитория  
+3. Создать **Blueprint** из файла `render.yaml` в корне репозитория  
    (или вручную: Web Service + PostgreSQL Free).
-4. Убедитесь, что переменные окружения заданы:
+4. Убедиться, что переменные окружения заданы:
    - `NODE_ENV=production`
    - `SESSION_KEY` — случайная строка (Render может сгенерировать)
    - `DATABASE_URL` — подставляется автоматически при связке с PostgreSQL
 5. **Build Command:** `npm install && npm run build && npx knex migrate:latest`
 6. **Start Command:** `npm start`
-7. После успешного деплоя замените ссылку в разделе «Демо» выше.
+7. После успешного деплоя заменить ссылку в разделе «Демо» выше.
 
 Подробнее: [Render Docs](https://render.com/docs), [PostgreSQL на Render](https://render.com/docs/postgresql-creating-connecting).
 
@@ -69,8 +69,8 @@ make test
 ### Шаг 2
 - [ ] Использовать [fastify nodejs application](https://github.com/hexlet-boilerplates/fastify-nodejs-application), как шаблон для своего приложения
 - [ ] Настроить базовое окружение, которое после старта на http-запрос на главную страницу (/) выдает приветствие
-- [ ] Задеплоить на Render то что получилось
-- [ ] Добавить в README.md ссылку на деплой
+- [ ] [Задеплоить на Render](https://hexlet-task-manager-n821.onrender.com) то что получилось
+- [x] Добавить в README.md [ссылку на деплой](https://hexlet-task-manager-n821.onrender.com)
 
 ### Шаг 1
 - [x] Подключиться к GitHub и [создать репозиторий](https://github.com/kirillchistov/fullstack-javascript-project-6)
