@@ -1,0 +1,27 @@
+extends ../layouts/application.pug
+
+block content
+  h1.mb-4= task.name
+  .row
+    .col-md-8
+      p(style='white-space: pre-line')= task.description
+    .col-md-4.border-start
+      p
+        span.badge.bg-secondary= task.status.name
+      p
+        span.text-muted.me-2= t('views.tasks.creator') + ':'
+        span= task.creator.fullName
+      p
+        span.text-muted.me-2= t('views.tasks.executor') + ':'
+        span= task.executor ? task.executor.fullName : ''
+      p
+        span.text-muted.me-2= t('views.tasks.createdAt') + ':'
+        span= formatDate(task.createdAt)
+      .d-flex.flex-wrap.gap-2.mt-3
+        a.btn.btn-primary(href=route('editTask', { id: task.id }))= t('views.tasks.actions.edit')
+        if getUserId() === task.creatorId.toString()
+          +formFor()(action=route('oneTask', { id: task.id }) method='post')
+            input(name='_method' type='hidden' value='delete')
+            input.btn.btn-danger(type='submit' value=t('views.tasks.actions.delete'))
+      p.mt-3
+        a(href=route('tasks'))= t('views.tasks.show.back')

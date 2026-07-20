@@ -65,6 +65,16 @@ export default (app) => {
       preHandler: app.onlyOwnerAccess,
     }, async (req, reply) => {
       const { id } = req.params;
+      const user = await UserModel.query().findById(id);
+
+      const createdTasks = await user.$relatedQuery('createdTasks');
+      const assignedTasks = await user.$relatedQuery('assignedTasks');
+
+      if (createdTasks.length || assignedTasks.length) {
+        req.flash('error', i18next.t('flash.users.delete.error'));
+        reply.redirect(app.reverse('users'));
+        return reply;
+      }
 
       try {
         await UserModel.query().deleteById(Number(id));

@@ -22,10 +22,24 @@ export const prepareStatusesData = async (app) => {
   await knex('task_statuses').insert(getFixtureData('task_statuses.json'));
 };
 
+export const prepareTasksData = async (app) => {
+  const { knex } = app.objection;
+
+  await knex('tasks').insert(getFixtureData('tasks.json'));
+};
+
 export const prepareData = async (app) => {
   await prepareUsersData(app);
   await prepareStatusesData(app);
+  await prepareTasksData(app);
 };
+
+export const getFakeTask = () => ({
+  name: faker.lorem.words(3),
+  description: faker.lorem.paragraph(),
+  statusId: '1',
+  executorId: '1',
+});
 
 export const getNewFakerUser = () => ({
   password: faker.internet.password(),
