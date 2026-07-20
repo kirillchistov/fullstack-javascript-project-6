@@ -37,9 +37,39 @@ export default (app) => {
 
   app
     .get('/tasks', { name: 'tasks', preValidation: app.authenticate }, async (req, reply) => {
+      const {
+        statuses, users, labels,
+      } = await getFormData();
+
+      const selection = Object.fromEntries(
+        Object.entries(req.query)
+          .filter(([, value]) => value !== '' && !Number.isNaN(Number(value)))
+          .map(([key, value]) => ([key, Number(value)])),
+      );
+
+      if (req.query?.isCreatorUser === 'on') {
+        selection.creator = req.user.id;
+      }
+
+      const {
+        executor, label, status, creator,
+      } = selection;
+
       const tasks = await TaskModel.query()
-        .withGraphFetched('[status, creator, executor, labels]');
-      reply.render('tasks/index', { tasks });
+        .skipUndefined()
+        .where('statusId', status)
+        .where('executorId', executor)
+        .where('creatorId', creator)
+        .withGraphJoined('[labels]')
+        .where('labelId', label);
+
+      await Promise.all(
+        tasks.map((task) => task.$fetchGraph('[status, creator, executor, labels]')),
+      );
+
+      reply.render('tasks/index', {
+        tasks, statuses, users, labels, selection,
+      });
       return reply;
     })
     .get('/tasks/new', { name: 'newTask', preValidation: app.authenticate }, async (req, reply) => {

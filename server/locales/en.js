@@ -147,7 +147,9 @@ export default {
           edit: 'Edit',
           delete: 'Delete',
           new: 'Create task',
+          showFiltered: 'Show',
         },
+        isCreatorUser: 'Only my tasks',
         new: {
           header: 'Create task',
           submit: 'Create',

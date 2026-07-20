@@ -195,6 +195,34 @@ describe('test tasks CRUD', () => {
     expect(await models.task.query().findById(id)).toBeDefined();
   });
 
+  describe('filtering', () => {
+    it('by all options for 1 task', async () => {
+      const response = await app.inject({
+        method: 'GET',
+        url: app.reverse('tasks'),
+        cookies: sessionCookie,
+        query: testData.tasks.filter,
+      });
+
+      expect(response.statusCode).toBe(200);
+      expect(response.body).toContain(testData.tasks.existing.name);
+      expect(response.body).not.toContain(testData.tasks.alternative.name);
+    });
+
+    it('by empty options, show all tasks', async () => {
+      const response = await app.inject({
+        method: 'GET',
+        url: app.reverse('tasks'),
+        cookies: sessionCookie,
+        query: testData.tasks.filterEmpty,
+      });
+
+      expect(response.statusCode).toBe(200);
+      expect(response.body).toContain(testData.tasks.existing.name);
+      expect(response.body).toContain(testData.tasks.alternative.name);
+    });
+  });
+
   afterEach(async () => {
     await knex.migrate.rollback();
   });

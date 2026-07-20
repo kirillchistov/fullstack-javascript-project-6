@@ -57,6 +57,17 @@
       "statusId": 2,
       "executorId": 1,
       "labels": ["1", "2"]
+    },
+    "filter": {
+      "status": "1",
+      "executor": "1",
+      "label": "1",
+      "isCreatorUser": "on"
+    },
+    "filterEmpty": {
+      "status": "",
+      "executor": "",
+      "label": ""
     }
   },
   "labels": {

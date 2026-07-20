@@ -147,7 +147,9 @@ export default {
           edit: 'Изменить',
           delete: 'Удалить',
           new: 'Создать задачу',
+          showFiltered: 'Показать',
         },
+        isCreatorUser: 'Только мои задачи',
         new: {
           header: 'Создание задачи',
           submit: 'Создать',

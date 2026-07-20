@@ -3,6 +3,26 @@ extends ../layouts/application.pug
 block content
   h1.mb-4= t('views.tasks.heading')
   a.btn.btn-primary.mb-3(href=route('newTask'))= t('views.tasks.actions.new')
+  +formFor()(action=route('tasks') method='get')
+    .row
+      .col-md-4
+        +filterSelect(selection, 'status', t('views.tasks.status'), statuses)
+      .col-md-4
+        +filterSelect(selection, 'label', t('views.tasks.labels'), labels)
+      .col-md-4
+        +filterSelect(selection, 'executor', t('views.tasks.executor'), users)
+    .row.align-items-center.mb-3
+      .col-md-8
+        .form-check
+          - isChecked = Number.isInteger(selection?.creator)
+          input.form-check-input#data_isCreatorUser(
+            type="checkbox"
+            name="isCreatorUser"
+            checked=isChecked
+          )
+          label.form-check-label(for="data_isCreatorUser")= t('views.tasks.isCreatorUser')
+      .col-md-4
+        +submit()(value=t('views.tasks.actions.showFiltered'))
   table.table.table-striped
     thead
       tr
