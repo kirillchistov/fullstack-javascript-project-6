@@ -130,7 +130,8 @@ describe('test statuses CRUD', () => {
     const status = await models.taskStatus.query().findOne({ name: updateParams.name });
     expect(status).toMatchObject(updateParams);
 
-    const nonExistentStatus = await models.taskStatus.query().findOne({ name: existingParams.name });
+    const nonExistentStatus = await models.taskStatus.query()
+      .findOne({ name: existingParams.name });
     expect(nonExistentStatus).toBeUndefined();
   });
 
