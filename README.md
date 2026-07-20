@@ -59,7 +59,7 @@ make test
    - `NODE_ENV=production`
    - `SESSION_KEY` — случайная строка (Render может сгенерировать)
    - `DATABASE_URL` — подставляется автоматически при связке с PostgreSQL
-5. **Build Command:** `npm install --legacy-peer-deps --ignore-scripts && npm run build && npx knex migrate:latest`
+5. **Build Command:** `npm install --include=dev --legacy-peer-deps --ignore-scripts && npm run build && npx knex migrate:latest && npm prune --omit=dev`
 6. **Start Command:** `npm start`
 7. После изменений нажмите **Manual Deploy → Clear build cache & deploy**
 8. После успешного деплоя замените ссылку в разделе «Демо» выше.
