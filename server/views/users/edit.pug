@@ -1,0 +1,15 @@
+extends ../layouts/application.pug
+
+block content
+  h1.mb-4= t('views.users.update.title')
+  +formFor()(action=route('oneUser', { id: user.id.toString() }) method='post')
+    input(type="hidden" name="_method" value="patch")
+    +input(user, 'firstName', t('views.users.firstName'), errors)(type="text" autofocus)
+    +input(user, 'lastName', t('views.users.lastName'), errors)(type="text")
+    +input(user, 'email', t('views.users.email'), errors)(type="text")
+    +input(user, 'password', t('views.users.password'), errors)(type="password")
+    +submit(user)(value=t('views.users.update.submit'))
+  hr.my-4
+  +formFor()(action=route('oneUser', { id: user.id.toString() }) method='post')
+    input(name='_method' type='hidden' value='delete')
+    input.btn.btn-danger(type='submit' value=t('views.users.deleteAction'))

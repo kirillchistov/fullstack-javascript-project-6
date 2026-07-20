@@ -14,13 +14,23 @@ module.exports = class User extends unique(BaseModel) {
   static get jsonSchema() {
     return {
       type: 'object',
-      required: ['email', 'password'],
+      required: ['firstName', 'lastName', 'email', 'password'],
       properties: {
         id: { type: 'integer' },
-        email: { type: 'string', minLength: 1 },
+        firstName: { type: 'string', minLength: 1 },
+        lastName: { type: 'string', minLength: 1 },
+        email: { type: 'string', format: 'email' },
         password: { type: 'string', minLength: 3 },
       },
     };
+  }
+
+  static get virtualAttributes() {
+    return ['fullName'];
+  }
+
+  get fullName() {
+    return `${this.firstName || ''} ${this.lastName || ''}`.trim();
   }
 
   set password(value) {
@@ -30,4 +40,4 @@ module.exports = class User extends unique(BaseModel) {
   verifyPassword(password) {
     return encrypt(password) === this.passwordDigest;
   }
-}
+};

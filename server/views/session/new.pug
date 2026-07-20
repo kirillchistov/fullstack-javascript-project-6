@@ -3,6 +3,6 @@ extends ../layouts/application.pug
 block content
   h1.mb-4= t('views.session.new.signIn')
   +formFor()(action=route('session') method='post')
-    +input(signInForm, 'email', errors)(type="text")
-    +input(signInForm, 'password')(type="password")
+    +input(signInForm, 'email', t('views.users.email'), errors)(type="text")
+    +input(signInForm, 'password', t('views.users.password'))(type="password")
     +submit(signInForm)(value=t('views.session.new.submit'))

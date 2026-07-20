@@ -85,9 +85,9 @@ make test
 ## Шаги и задачи
 
 ### Шаг 3
-- [ ] Выбрать из [Bootstrap Examples](https://getbootstrap.com/docs/5.3/examples/) дизайн для приложения
-- [ ] Подключить дизайн и настроить Fastify для отдачи главной страницы на `/`
-- [ ] Организовать хранение текстов в i18next и подстановку в Pug-шаблонах
+- [x] Выбрать из [Bootstrap Examples](https://getbootstrap.com/docs/5.3/examples/) дизайн для приложения
+- [x] Подключить дизайн и настроить Fastify для отдачи главной страницы на `/`
+- [x] Организовать хранение текстов в i18next и подстановку в Pug-шаблонах
 
 ### Шаг 2
 - [x] Использовать [fastify nodejs application](https://github.com/hexlet-boilerplates/fastify-nodejs-application), как шаблон для своего приложения

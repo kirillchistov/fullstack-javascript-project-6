@@ -5,8 +5,11 @@ import i18next from 'i18next';
 import _ from 'lodash';
 
 export default (app) => ({
-  route(name) {
-    return app.reverse(name);
+  route(name, params) {
+    if (params?.id != null) {
+      return app.reverse(name, { ...params, id: String(params.id) });
+    }
+    return app.reverse(name, params);
   },
   t(key) {
     return i18next.t(key);

@@ -75,6 +75,7 @@ const addHooks = (app) => {
   app.addHook('preHandler', async (req, reply) => {
     reply.locals = {
       isAuthenticated: () => req.isAuthenticated(),
+      getUserId: () => req.user?.id?.toString(),
     };
   });
 };
@@ -108,6 +109,13 @@ const registerPlugins = async (app) => {
     },
   // @ts-ignore
   )(...args));
+
+  app.decorate('onlyOwnerAccess', async (req, reply) => {
+    if (Number(req.params.id) !== req.user.id) {
+      req.flash('error', i18next.t('flash.users.onlyOwnerAccess'));
+      reply.redirect(app.reverse('users'));
+    }
+  });
 
   await app.register(fastifyObjectionjs, {
     knexConfig: knexConfig[mode],

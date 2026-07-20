@@ -31,6 +31,8 @@ html(lang="en")
             ul.navbar-nav.ms-auto.mb-2.mb-lg-0
               if isAuthenticated()
                 li.nav-item
+                  a.nav-link(href=route('editUser', { id: getUserId() }))= t('layouts.application.settings')
+                li.nav-item
                   +buttonTo(route('session'), 'delete')(class="btn nav-link" value=t('layouts.application.signOut'))
               else
                 li.nav-item

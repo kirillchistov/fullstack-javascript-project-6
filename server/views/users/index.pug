@@ -6,11 +6,23 @@ block content
     thead
       tr
         th= t('views.users.id')
+        th= t('views.users.fullName')
         th= t('views.users.email')
         th= t('views.users.createdAt')
+        if isAuthenticated()
+          th= t('views.users.actions')
     tbody
       each user in users
-        tr
+        tr(class=(getUserId() === user.id.toString() && 'fw-semibold'))
           td= user.id
+          td= user.fullName
           td= user.email
           td= formatDate(user.createdAt)
+          if isAuthenticated()
+            td
+              if getUserId() === user.id.toString()
+                .d-flex.flex-wrap.gap-2
+                  a.btn.btn-primary.btn-sm(href=route('editUser', { id: user.id.toString() }))= t('views.users.updateAction')
+                  +formFor()(action=route('oneUser', { id: user.id.toString() }) method='post')
+                    input(name='_method' type='hidden' value='delete')
+                    input.btn.btn-danger.btn-sm(type='submit' value=t('views.users.deleteAction'))

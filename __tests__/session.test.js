@@ -2,7 +2,7 @@
 
 import fastify from 'fastify';
 import init from '../server/plugin.js';
-import { getTestData, prepareData } from './helpers/index.js';
+import { getTestData, prepareUsersData } from './helpers/index.js';
 
 describe('test session', () => {
   let app;
@@ -17,7 +17,7 @@ describe('test session', () => {
     await init(app);
     knex = app.objection.knex;
     await knex.migrate.latest();
-    await prepareData(app);
+    await prepareUsersData(app);
     testData = getTestData();
   });
 

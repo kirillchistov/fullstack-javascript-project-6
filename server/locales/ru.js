@@ -18,12 +18,22 @@ export default {
           error: 'Не удалось зарегистрировать',
           success: 'Пользователь успешно зарегистрирован',
         },
+        update: {
+          error: 'Не удалось изменить пользователя',
+          success: 'Пользователь успешно изменён',
+        },
+        delete: {
+          error: 'Не удалось удалить пользователя',
+          success: 'Пользователь успешно удалён',
+        },
+        onlyOwnerAccess: 'Вы не можете редактировать или удалять другого пользователя',
       },
       authError: 'Доступ запрещён! Пожалуйста, авторизируйтесь.',
     },
     layouts: {
       application: {
         users: 'Пользователи',
+        settings: 'Настройки',
         signIn: 'Вход',
         signUp: 'Регистрация',
         signOut: 'Выход',
@@ -40,11 +50,22 @@ export default {
       },
       users: {
         id: 'ID',
+        firstName: 'Имя',
+        lastName: 'Фамилия',
+        fullName: 'Полное имя',
         email: 'Email',
+        password: 'Пароль',
+        actions: 'Действия',
+        updateAction: 'Изменить',
+        deleteAction: 'Удалить',
         createdAt: 'Дата создания',
         new: {
           submit: 'Сохранить',
           signUp: 'Регистрация',
+        },
+        update: {
+          title: 'Изменение пользователя',
+          submit: 'Изменить',
         },
       },
       welcome: {
