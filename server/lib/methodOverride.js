@@ -14,7 +14,33 @@ const getHooks = (routeOptions, hookName) => {
 };
 
 const hooksTable = ['preValidation', 'preHandler'];
-const getAllHooks = (routeOptions) => _.flatMap(hooksTable, (hookName) => getHooks(routeOptions, hookName));
+const getAllHooks = (routeOptions) => (
+  _.flatMap(hooksTable, (hookName) => getHooks(routeOptions, hookName))
+);
+
+const runHook = (hook, req, reply) => new Promise((resolve, reject) => {
+  const maybePromise = hook(req, reply, (err) => {
+    if (err) {
+      reject(err);
+    } else {
+      resolve(undefined);
+    }
+  });
+
+  if (_.get(maybePromise, 'constructor.name') === 'Promise') {
+    maybePromise.then(() => resolve(undefined)).catch(reject);
+  }
+});
+
+const runHooksSequentially = async (hooks, req, reply) => {
+  await hooks.reduce(async (previous, hook) => {
+    await previous;
+    if (reply.sent) {
+      return undefined;
+    }
+    return runHook(hook, req, reply);
+  }, Promise.resolve());
+};
 
 async function methodOverridePlugin(fastify) {
   const allowMethods = new Set(['head', 'put', 'delete', 'options', 'patch']);
@@ -57,28 +83,11 @@ async function methodOverridePlugin(fastify) {
       });
       _.set(req, 'raw.method', _.toUpper(method));
 
-      for (const hook of hooks) {
-        // eslint-disable-next-line no-await-in-loop
-        await new Promise((resolve, reject) => {
-          const maybePromise = hook(req, reply, (err) => {
-            if (err) {
-              reject(err);
-            } else {
-              resolve(undefined);
-            }
-          });
+      await runHooksSequentially(hooks, req, reply);
 
-          if (_.get(maybePromise, 'constructor.name') === 'Promise') {
-            maybePromise.then(() => resolve(undefined)).catch(reject);
-          }
-        });
-
-        if (reply.sent) {
-          return;
-        }
+      if (!reply.sent) {
+        await handler(req, reply);
       }
-
-      await handler(req, reply);
     }
   };
 

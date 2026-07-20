@@ -10,11 +10,12 @@ import fastifySecureSession from '@fastify/secure-session';
 import fastifyPassport from '@fastify/passport';
 import fastifySensible from '@fastify/sensible';
 import { plugin as fastifyReverseRoutes } from 'fastify-reverse-routes';
-import fastifyMethodOverride from './lib/methodOverride.js';
 import fastifyObjectionjs from 'fastify-objectionjs';
 import qs from 'qs';
 import Pug from 'pug';
 import i18next from 'i18next';
+
+import fastifyMethodOverride from './lib/methodOverride.js';
 
 import ru from './locales/ru.js';
 import en from './locales/en.js';
@@ -82,7 +83,7 @@ const registerPlugins = async (app) => {
   await app.register(fastifySensible);
   await app.register(fastifyReverseRoutes);
   await app.register(fastifyFormbody, { parser: qs.parse });
-  // Регистрируем до async-плагинов: fastify-method-override несовместим с Fastify 5 в async-контексте
+  // method-override регистрируем до passport (совместимость с Fastify 5)
   await app.register(fastifyMethodOverride);
   await app.register(fastifySecureSession, {
     secret: process.env.SESSION_KEY,
