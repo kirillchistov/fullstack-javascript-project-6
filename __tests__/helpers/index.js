@@ -16,6 +16,17 @@ export const prepareUsersData = async (app) => {
   await knex('users').insert(getFixtureData('users.json'));
 };
 
+export const prepareStatusesData = async (app) => {
+  const { knex } = app.objection;
+
+  await knex('task_statuses').insert(getFixtureData('task_statuses.json'));
+};
+
+export const prepareData = async (app) => {
+  await prepareUsersData(app);
+  await prepareStatusesData(app);
+};
+
 export const getNewFakerUser = () => ({
   password: faker.internet.password(),
   email: faker.internet.email(),

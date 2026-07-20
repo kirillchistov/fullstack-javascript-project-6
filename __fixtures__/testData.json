@@ -18,5 +18,16 @@
       "firstName": "Lawrence",
       "lastName": "Kulas"
     }
+  },
+  "taskStatuses": {
+    "existing": {
+      "name": "новый"
+    },
+    "updated": {
+      "name": "на проверке"
+    },
+    "unrelated": {
+      "name": "завершен"
+    }
   }
 }

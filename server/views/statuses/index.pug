@@ -1,0 +1,24 @@
+extends ../layouts/application.pug
+
+block content
+  h1.mb-4= t('views.statuses.heading')
+  a.btn.btn-primary.mb-3(href=route('newStatus'))= t('views.statuses.actions.new')
+  table.table.table-striped
+    thead
+      tr
+        th= t('views.statuses.id')
+        th= t('views.statuses.name')
+        th= t('views.statuses.createdAt')
+        th
+    tbody
+      each status in statuses
+        tr
+          td= status.id
+          td= status.name
+          td= formatDate(status.createdAt)
+          td
+            .d-flex.flex-wrap.gap-2
+              a.btn.btn-primary.btn-sm(href=route('editStatus', { id: status.id }))= t('views.statuses.actions.edit')
+              +formFor()(action=route('oneStatus', { id: status.id }) method='post')
+                input(name='_method' type='hidden' value='delete')
+                input.btn.btn-danger.btn-sm(type='submit' value=t('views.statuses.actions.delete'))
