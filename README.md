@@ -5,7 +5,7 @@
 
 - Система управления задачами, подобная Redmine. Она позволяет ставить задачи, назначать исполнителей и менять их статусы. Для работы с системой требуется регистрация и аутентификация.
 - Этот проект охватывает ключевые аспекты разработки сайтов, в том числе сборку (webpack) и деплой, ORM (o2m, m2m).
-- В работе используется веб-фреймворк Fastify, шаблонизация Pug и Bootstrap.
+- В работе используется веб-фреймворк Fastify, серверный рендеринг (Pug), Bootstrap и i18next.
 - Шаблон приложения: [fastify-nodejs-application](https://github.com/hexlet-boilerplates/fastify-nodejs-application).
 
 ## Демо
@@ -27,20 +27,36 @@ make setup
 ## Запуск
 
 ```bash
+make setup
 make start
+```
+
+Или напрямую:
+
+```bash
+npm run start:dev
 ```
 
 Приложение доступно на [http://localhost:5001](http://localhost:5001) (порт задаётся в `.env`, по умолчанию 5001 — на macOS порт 5000 часто занят AirPlay).
 
-На главной странице (`/`) должно отображаться приветствие «Привет от Хекслета!».
+На главной странице (`/`) — Bootstrap navbar с пунктами Users / Login / Register и hero-блок с приветствием (тексты из i18next, язык по умолчанию — English).
 
 ## Разработка
 
+С hot-reload backend и webpack watch в одном терминале:
+
 ```bash
-make start
+make develop
 ```
 
-Запускает backend и webpack watch через `heroku local` (см. `Procfile.dev`).
+Или в двух терминалах:
+
+```bash
+make start-frontend   # терминал 1
+make start-backend    # терминал 2
+```
+
+Если установлен [Heroku CLI](https://devcenter.heroku.com/articles/heroku-cli), можно использовать `make start-heroku`.
 
 ## Тесты
 
@@ -68,10 +84,15 @@ make test
 
 ## Шаги и задачи
 
+### Шаг 3
+- [ ] Выбрать из [Bootstrap Examples](https://getbootstrap.com/docs/5.3/examples/) дизайн для приложения
+- [ ] Подключить дизайн и настроить Fastify для отдачи главной страницы на `/`
+- [ ] Организовать хранение текстов в i18next и подстановку в Pug-шаблонах
+
 ### Шаг 2
-- [ ] Использовать [fastify nodejs application](https://github.com/hexlet-boilerplates/fastify-nodejs-application), как шаблон для своего приложения
-- [ ] Настроить базовое окружение, которое после старта на http-запрос на главную страницу (/) выдает приветствие
-- [ ] [Задеплоить на Render](https://hexlet-task-manager-n821.onrender.com) то что получилось
+- [x] Использовать [fastify nodejs application](https://github.com/hexlet-boilerplates/fastify-nodejs-application), как шаблон для своего приложения
+- [x] Настроить базовое окружение, которое после старта на http-запрос на главную страницу (/) выдает приветствие
+- [x] [Задеплоить на Render](https://hexlet-task-manager-n821.onrender.com) то что получилось
 - [x] Добавить в README.md [ссылку на деплой](https://hexlet-task-manager-n821.onrender.com)
 
 ### Шаг 1

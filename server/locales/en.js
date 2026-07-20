@@ -1,8 +1,8 @@
-// @ts-check
+// Английские тексты интерфейса (язык по умолчанию для i18next).
 
 export default {
   translation: {
-    appName: 'Fastify Boilerplate',
+    appName: 'Task Manager',
     flash: {
       session: {
         create: {
@@ -27,6 +27,8 @@ export default {
         signIn: 'Login',
         signUp: 'Register',
         signOut: 'Logout',
+        footer: '© Hexlet Ltd, 2021',
+        toggleNavigation: 'Toggle navigation',
       },
     },
     views: {
@@ -41,14 +43,14 @@ export default {
         email: 'Email',
         createdAt: 'Created at',
         new: {
-          submit: 'Register',
+          submit: 'Save',
           signUp: 'Register',
         },
       },
       welcome: {
         index: {
           hello: 'Hello from Hexlet!',
-          description: 'Online programming school',
+          description: 'Practical programming courses',
           more: 'Learn more',
         },
       },

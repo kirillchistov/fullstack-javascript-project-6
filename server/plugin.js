@@ -62,11 +62,11 @@ const setUpStaticAssets = async (app) => {
 const setupLocalization = async () => {
   await i18next
     .init({
-      lng: 'ru',
-      fallbackLng: 'ru',
+      lng: 'en',
+      fallbackLng: 'en',
       resources: {
-        ru,
         en,
+        ru,
       },
     });
 };

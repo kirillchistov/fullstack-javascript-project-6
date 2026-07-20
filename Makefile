@@ -14,19 +14,28 @@ build:
 prepare:
 	cp -n .env.example .env || true
 
+# Быстрый запуск после make setup (Heroku CLI не требуется)
 start:
-	heroku local -f Procfile.dev
+	npm run start:dev
+
+# Backend с hot-reload (Node --watch)
+develop:
+	npx webpack --watch --progress & npm run start:dev
 
 start-backend:
-	npm run start:dev -- --watch --verbose-watch --ignore-watch='node_modules .git .sqlite'
+	npm run start:dev
 
 start-frontend:
 	npx webpack --watch --progress
 
-develop: start-backend start-frontend
+# Оригинальный способ из шаблона Hexlet (нужен установленный Heroku CLI)
+start-heroku:
+	heroku local -f Procfile.dev
 
 lint:
 	npx eslint .
 
 test:
 	npm test -s
+
+.PHONY: setup install db-migrate build prepare start develop start-backend start-frontend start-heroku lint test

@@ -4,7 +4,7 @@
 
 ## Обзор
 
-Task Manager — серверное веб-приложение на **Fastify** с шаблонами **Pug**, стилями **Bootstrap** + кастомный CSS, ORM **Objection/Knex** и деплоем на **Render** (Web Service + PostgreSQL).
+Task Manager — серверное веб-приложение на **Fastify** с **SSR** (шаблоны **Pug**), стилями **Bootstrap** (без кастомного CSS), ORM **Objection/Knex** и деплоем на **Render**.
 
 NPM-пакет: `@hexlet/code`  
 Точка входа: `server/plugin.js` — экспортирует async-функцию, которую поднимает `fastify-cli`.
@@ -17,11 +17,11 @@ NPM-пакет: `@hexlet/code`
 | Запуск сервера | `server/index.js` | Production-старт через `npm start` (Render) |
 | Маршруты | `server/routes/*.js` | HTTP-обработчики (welcome, users, session) |
 | Шаблоны | `server/views/**/*.pug` | HTML-разметка страниц |
-| Локализация | `server/locales/ru.js` | Тексты интерфейса (совпадают с демо Hexlet) |
+| Локализация | `server/locales/en.js`, `server/locales/ru.js` | Тексты интерфейса (i18next, default: `en`) |
 | Модели | `server/models/*.cjs` | Objection-модели (User и базовая модель) |
 | Миграции | `server/migrations/` | Схема БД через Knex |
 | Конфиг БД | `knexfile.js` | SQLite (dev/test), PostgreSQL (production) |
-| Фронтенд | `src/index.js`, `src/styles/app.css` | Сборка CSS/JS в `dist/` через Webpack |
+| Фронтенд | `src/index.js` | Сборка Bootstrap CSS/JS в `dist/` через Webpack |
 | Method override | `server/lib/methodOverride.js` | POST + `_method` для logout (совместимость с Fastify 5) |
 | Деплой | `render.yaml` | Blueprint для Render (web + PostgreSQL) |
 
@@ -35,6 +35,8 @@ NPM-пакет: `@hexlet/code`
 - `NODE_ENV` — режим (`development` / `production` / `test`)
 
 Локально значения загружаются из `.env` через [dotenv](https://www.npmjs.com/package/dotenv) (см. `.env.example`).
+
+Язык интерфейса по умолчанию — **English** (`server/plugin.js` → `i18next.init({ lng: 'en' })`). Русские тексты для демо лежат в `server/locales/ru.js`.
 
 ## Схема: запрос главной страницы
 

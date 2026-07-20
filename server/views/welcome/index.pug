@@ -1,11 +1,15 @@
 extends ../layouts/application.pug
 
-//- Главная страница с приветствием (маршрут GET /)
+//- Главная страница (GET /) — Bootstrap Hero example.
 
 block content
-  .card.welcome-card
-    .card-body.p-5
-      .display-4= t('views.welcome.index.hello')
-      p.lead= t('views.welcome.index.description')
-      hr
-      a.btn.btn-primary.btn-lg(href="https://hexlet.io" target="_blank" rel="noopener noreferrer")= t('views.welcome.index.more')
+  .px-4.py-5.my-5.text-center
+    h1.display-4.fw-bold.text-body-emphasis= t('views.welcome.index.hello')
+    .col-lg-6.mx-auto
+      p.lead.mb-4= t('views.welcome.index.description')
+      .d-grid.gap-2.d-sm-flex.justify-content-sm-center
+        a.btn.btn-primary.btn-lg.px-4.gap-3(
+          href="https://hexlet.io"
+          target="_blank"
+          rel="noopener noreferrer"
+        )= t('views.welcome.index.more')

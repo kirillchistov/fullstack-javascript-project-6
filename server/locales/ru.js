@@ -1,4 +1,4 @@
-// Русские тексты интерфейса — должны совпадать с демо https://js-task-manager-ru.hexlet.app/
+// Русские тексты интерфейса — совпадают с демо https://js-task-manager-ru.hexlet.app/
 
 export default {
   translation: {
@@ -27,6 +27,8 @@ export default {
         signIn: 'Вход',
         signUp: 'Регистрация',
         signOut: 'Выход',
+        footer: '© Hexlet Ltd, 2021',
+        toggleNavigation: 'Переключить навигацию',
       },
     },
     views: {
