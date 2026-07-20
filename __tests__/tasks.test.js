@@ -79,7 +79,7 @@ describe('test tasks CRUD', () => {
   });
 
   it('create', async () => {
-    const params = getFakeTask();
+    const params = getFakeTask(true);
 
     const responseNoAuth = await app.inject({
       method: 'POST',
@@ -98,7 +98,8 @@ describe('test tasks CRUD', () => {
     expect(response.statusCode).toBe(302);
     expect(response.headers.location).toBe(app.reverse('tasks'));
 
-    const task = await models.task.query().findOne({ name: params.name });
+    const task = await models.task.query().findOne({ name: params.name })
+      .withGraphFetched('labels');
     expect(task).toMatchObject({
       name: params.name,
       description: params.description,
@@ -106,6 +107,7 @@ describe('test tasks CRUD', () => {
       executorId: Number(params.executorId),
       creatorId: 2,
     });
+    expect(task.labels.map(({ id }) => id).sort()).toEqual([1, 2]);
   });
 
   it('edit', async () => {
@@ -150,7 +152,7 @@ describe('test tasks CRUD', () => {
     });
     expect(response.statusCode).toBe(302);
 
-    const task = await models.task.query().findById(id);
+    const task = await models.task.query().findById(id).withGraphFetched('labels');
     expect(task).toMatchObject({
       name: updateParams.name,
       description: updateParams.description,
@@ -158,6 +160,7 @@ describe('test tasks CRUD', () => {
       executorId: updateParams.executorId,
       creatorId: taskExisting.creatorId,
     });
+    expect(task.labels.map(({ id: labelId }) => labelId).sort()).toEqual([1, 2]);
   });
 
   it('delete by creator', async () => {

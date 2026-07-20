@@ -57,6 +57,20 @@ export default {
           success: 'Задача успешно удалена',
         },
       },
+      labels: {
+        create: {
+          error: 'Не удалось создать метку',
+          success: 'Метка успешно создана',
+        },
+        edit: {
+          error: 'Не удалось изменить метку',
+          success: 'Метка успешно изменена',
+        },
+        delete: {
+          error: 'Не удалось удалить метку',
+          success: 'Метка успешно удалена',
+        },
+      },
       authError: 'Доступ запрещён! Пожалуйста, авторизируйтесь.',
     },
     layouts: {
@@ -64,6 +78,7 @@ export default {
         users: 'Пользователи',
         statuses: 'Статусы',
         tasks: 'Задачи',
+        labels: 'Метки',
         settings: 'Настройки',
         signIn: 'Вход',
         signUp: 'Регистрация',
@@ -124,6 +139,7 @@ export default {
         name: 'Наименование',
         description: 'Описание',
         status: 'Статус',
+        labels: 'Метки',
         creator: 'Автор',
         executor: 'Исполнитель',
         createdAt: 'Дата создания',
@@ -142,6 +158,25 @@ export default {
         },
         show: {
           back: 'Назад',
+        },
+      },
+      labels: {
+        heading: 'Метки',
+        id: 'ID',
+        name: 'Наименование',
+        createdAt: 'Дата создания',
+        actions: {
+          edit: 'Изменить',
+          delete: 'Удалить',
+          new: 'Создать метку',
+        },
+        new: {
+          header: 'Создание метки',
+          submit: 'Создать',
+        },
+        edit: {
+          header: 'Изменение метки',
+          submit: 'Изменить',
         },
       },
       welcome: {

@@ -1,0 +1,24 @@
+extends ../layouts/application.pug
+
+block content
+  h1.mb-4= t('views.labels.heading')
+  a.btn.btn-primary.mb-3(href=route('newLabel'))= t('views.labels.actions.new')
+  table.table.table-striped
+    thead
+      tr
+        th= t('views.labels.id')
+        th= t('views.labels.name')
+        th= t('views.labels.createdAt')
+        th
+    tbody
+      each label in labels
+        tr
+          td= label.id
+          td= label.name
+          td= formatDate(label.createdAt)
+          td
+            .d-flex.flex-wrap.gap-2
+              a.btn.btn-primary.btn-sm(href=route('editLabel', { id: label.id }))= t('views.labels.actions.edit')
+              +formFor()(action=route('oneLabel', { id: label.id }) method='post')
+                input(name='_method' type='hidden' value='delete')
+                input.btn.btn-danger.btn-sm(type='submit' value=t('views.labels.actions.delete'))

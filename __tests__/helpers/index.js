@@ -28,17 +28,32 @@ export const prepareTasksData = async (app) => {
   await knex('tasks').insert(getFixtureData('tasks.json'));
 };
 
+export const prepareLabelsData = async (app) => {
+  const { knex } = app.objection;
+
+  await knex('labels').insert(getFixtureData('labels.json'));
+};
+
+export const prepareTasksLabelsData = async (app) => {
+  const { knex } = app.objection;
+
+  await knex('tasks_labels').insert(getFixtureData('tasks_labels.json'));
+};
+
 export const prepareData = async (app) => {
   await prepareUsersData(app);
   await prepareStatusesData(app);
   await prepareTasksData(app);
+  await prepareLabelsData(app);
+  await prepareTasksLabelsData(app);
 };
 
-export const getFakeTask = () => ({
+export const getFakeTask = (withLabels = false) => ({
   name: faker.lorem.words(3),
   description: faker.lorem.paragraph(),
   statusId: '1',
   executorId: '1',
+  ...(withLabels ? { labels: ['1', '2'] } : {}),
 });
 
 export const getNewFakerUser = () => ({

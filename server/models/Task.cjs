@@ -48,6 +48,18 @@ module.exports = class Task extends BaseModel {
           to: 'users.id',
         },
       },
+      labels: {
+        relation: BaseModel.ManyToManyRelation,
+        modelClass: 'Label.cjs',
+        join: {
+          from: 'tasks.id',
+          through: {
+            from: 'tasks_labels.taskId',
+            to: 'tasks_labels.labelId',
+          },
+          to: 'labels.id',
+        },
+      },
     };
   }
 
@@ -55,10 +67,15 @@ module.exports = class Task extends BaseModel {
     // eslint-disable-next-line no-param-reassign
     json = super.$parseJson(json, opt);
 
+    const labelIds = [].concat(json.labels || [])
+      .filter(Boolean)
+      .map((label) => Number(label));
+
     return {
       ...json,
       statusId: json.statusId ? Number(json.statusId) : json.statusId,
       executorId: json.executorId ? Number(json.executorId) : null,
+      labels: labelIds.map((id) => ({ id })),
     };
   }
 };

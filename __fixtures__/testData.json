@@ -55,7 +55,19 @@
       "name": "Обновленная задача 1",
       "description": "Обновленное описание задачи 1",
       "statusId": 2,
-      "executorId": 1
+      "executorId": 1,
+      "labels": ["1", "2"]
+    }
+  },
+  "labels": {
+    "existing": {
+      "name": "bug"
+    },
+    "updated": {
+      "name": "debug"
+    },
+    "unrelated": {
+      "name": "completed"
     }
   }
 }

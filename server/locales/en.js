@@ -57,6 +57,20 @@ export default {
           success: 'Task deleted successfully',
         },
       },
+      labels: {
+        create: {
+          error: 'Failed to create label',
+          success: 'Label created successfully',
+        },
+        edit: {
+          error: 'Failed to update label',
+          success: 'Label updated successfully',
+        },
+        delete: {
+          error: 'Failed to delete label',
+          success: 'Label deleted successfully',
+        },
+      },
       authError: 'Access denied! Please login',
     },
     layouts: {
@@ -64,6 +78,7 @@ export default {
         users: 'Users',
         statuses: 'Statuses',
         tasks: 'Tasks',
+        labels: 'Labels',
         settings: 'Settings',
         signIn: 'Login',
         signUp: 'Register',
@@ -124,6 +139,7 @@ export default {
         name: 'Name',
         description: 'Description',
         status: 'Status',
+        labels: 'Labels',
         creator: 'Author',
         executor: 'Assignee',
         createdAt: 'Created at',
@@ -142,6 +158,25 @@ export default {
         },
         show: {
           back: 'Back',
+        },
+      },
+      labels: {
+        heading: 'Labels',
+        id: 'ID',
+        name: 'Name',
+        createdAt: 'Created at',
+        actions: {
+          edit: 'Edit',
+          delete: 'Delete',
+          new: 'Create label',
+        },
+        new: {
+          header: 'Create label',
+          submit: 'Create',
+        },
+        edit: {
+          header: 'Edit label',
+          submit: 'Update',
         },
       },
       welcome: {

@@ -8,6 +8,8 @@ block content
     .col-md-4.border-start
       p
         span.badge.bg-secondary= task.status.name
+        each label in task.labels
+          span.badge.bg-info.ms-1= label.name
       p
         span.text-muted.me-2= t('views.tasks.creator') + ':'
         span= task.creator.fullName
