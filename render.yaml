@@ -1,0 +1,26 @@
+# Blueprint Render: web-сервис + PostgreSQL для деплоя одной кнопкой.
+# Документация: https://render.com/docs/infrastructure-as-code
+
+databases:
+  - name: hexlet-task-manager-db
+    plan: free
+    databaseName: hexlet_task_manager
+    user: hexlet_task_manager
+
+services:
+  - type: web
+    name: hexlet-task-manager
+    runtime: node
+    plan: free
+    buildCommand: npm install && npm run build && npx knex migrate:latest
+    startCommand: npm start
+    healthCheckPath: /
+    envVars:
+      - key: NODE_ENV
+        value: production
+      - key: SESSION_KEY
+        generateValue: true
+      - key: DATABASE_URL
+        fromDatabase:
+          name: hexlet-task-manager-db
+          property: connectionString
