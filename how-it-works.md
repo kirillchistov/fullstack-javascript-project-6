@@ -13,7 +13,8 @@ NPM-пакет: `@hexlet/code`
 
 | Модуль | Файл | Назначение |
 |--------|------|------------|
-| Точка входа | `server/plugin.js` | Регистрация плагинов, БД, i18n, статики, маршрутов |
+| Точка входа | `server/plugin.js` | Fastify-плагин (экспорт для тестов и `main` в package.json) |
+| Запуск сервера | `server/index.js` | Production-старт через `npm start` (Render) |
 | Маршруты | `server/routes/*.js` | HTTP-обработчики (welcome, users, session) |
 | Шаблоны | `server/views/**/*.pug` | HTML-разметка страниц |
 | Локализация | `server/locales/ru.js` | Тексты интерфейса (совпадают с демо Hexlet) |
