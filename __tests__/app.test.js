@@ -34,6 +34,14 @@ describe('requests', () => {
     expect(res.statusCode).toBe(404);
   });
 
+  it('GET /errors 500', async () => {
+    const res = await app.inject({
+      method: 'GET',
+      url: app.reverse('errors'),
+    });
+    expect(res.statusCode).toBe(500);
+  });
+
   afterAll(async () => {
     await app.close();
   });

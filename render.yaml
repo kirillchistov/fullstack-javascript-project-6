@@ -26,3 +26,5 @@ services:
         fromDatabase:
           name: hexlet-task-manager-db
           property: connectionString
+      - key: VITE_ROLLBAR_ACCESS_TOKEN
+        sync: false

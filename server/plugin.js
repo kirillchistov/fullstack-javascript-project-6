@@ -16,6 +16,7 @@ import Pug from 'pug';
 import i18next from 'i18next';
 
 import fastifyMethodOverride from './lib/methodOverride.js';
+import rollbarFactory from './lib/rollbar.js';
 
 import ru from './locales/ru.js';
 import en from './locales/en.js';
@@ -31,6 +32,11 @@ dotenv.config();
 const __dirname = fileURLToPath(path.dirname(import.meta.url));
 
 const mode = process.env.NODE_ENV || 'development';
+
+const rollbar = rollbarFactory({
+  accessToken: process.env.VITE_ROLLBAR_ACCESS_TOKEN,
+  environment: mode,
+});
 
 const setUpViews = async (app) => {
   const helpers = getHelpers(app);
@@ -77,6 +83,13 @@ const addHooks = (app) => {
       isAuthenticated: () => req.isAuthenticated(),
       getUserId: () => req.user?.id?.toString(),
     };
+  });
+};
+
+const setUpErrorHandling = (app) => {
+  app.setErrorHandler((error, request, reply) => {
+    rollbar.error(error, request.raw);
+    reply.send(error);
   });
 };
 
@@ -136,6 +149,7 @@ export default async (app, _options) => {
   await setUpStaticAssets(app);
   addRoutes(app);
   addHooks(app);
+  setUpErrorHandling(app);
 
   return app;
 };

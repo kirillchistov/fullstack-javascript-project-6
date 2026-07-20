@@ -7,5 +7,8 @@ export default (app) => {
     })
     .get('/protected', { name: 'protected', preValidation: app.authenticate }, (req, reply) => {
       reply.render('welcome/index');
+    })
+    .get('/errors', { name: 'errors' }, () => {
+      throw new Error('Test error for Rollbar');
     });
 };
