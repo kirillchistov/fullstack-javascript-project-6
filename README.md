@@ -54,13 +54,15 @@ make test
 2. Подключите GitHub-репозиторий проекта.
 3. Создать **Blueprint** из файла `render.yaml` в корне репозитория  
    (или вручную: Web Service + PostgreSQL Free).
-4. Убедиться, что переменные окружения заданы:
+4. **Обязательно** задайте переменные окружения (Dashboard → Environment):
+   - `NODE_VERSION=20.18.3` — без этого Render может взять Node 26 и сборка упадёт
    - `NODE_ENV=production`
    - `SESSION_KEY` — случайная строка (Render может сгенерировать)
    - `DATABASE_URL` — подставляется автоматически при связке с PostgreSQL
-5. **Build Command:** `npm install && npm run build && npx knex migrate:latest`
+5. **Build Command:** `npm install --legacy-peer-deps --ignore-scripts && npm run build && npx knex migrate:latest`
 6. **Start Command:** `npm start`
-7. После успешного деплоя заменить ссылку в разделе «Демо» выше.
+7. После изменений нажмите **Manual Deploy → Clear build cache & deploy**
+8. После успешного деплоя замените ссылку в разделе «Демо» выше.
 
 Подробнее: [Render Docs](https://render.com/docs), [PostgreSQL на Render](https://render.com/docs/postgresql-creating-connecting).
 

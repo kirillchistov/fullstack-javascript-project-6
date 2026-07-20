@@ -12,7 +12,7 @@ services:
     name: hexlet-task-manager
     runtime: node
     plan: free
-    buildCommand: npm install && npm run build && npx knex migrate:latest
+    buildCommand: npm install --legacy-peer-deps --ignore-scripts && npm run build && npx knex migrate:latest
     startCommand: npm start
     healthCheckPath: /
     envVars:
