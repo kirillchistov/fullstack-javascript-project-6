@@ -10,12 +10,12 @@ import fastifySecureSession from '@fastify/secure-session';
 import fastifyPassport from '@fastify/passport';
 import fastifySensible from '@fastify/sensible';
 import { plugin as fastifyReverseRoutes } from 'fastify-reverse-routes';
-import fastifyObjectionjs from 'fastify-objectionjs';
 import qs from 'qs';
 import Pug from 'pug';
 import i18next from 'i18next';
 
 import fastifyMethodOverride from './lib/methodOverride.js';
+import fastifyObjectionjs from './lib/objection.js';
 import rollbarFactory, { getRollbarAccessToken } from './lib/rollbar.js';
 
 import ru from './locales/ru.js';
@@ -63,7 +63,7 @@ const setUpStaticAssets = async (app) => {
 const setupLocalization = async () => {
   await i18next
     .init({
-      lng: 'en',
+      lng: 'ru',
       fallbackLng: 'en',
       resources: {
         en,
